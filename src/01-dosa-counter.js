@@ -33,4 +33,23 @@
  */
 export function calculateDosaOrder(type, quantity = 1, isSpicy = false) {
   // Your code here
+  if (typeof type !== 'string') return null
+  if (typeof quantity !== 'number'||quantity <= 0 || Number.isNaN(quantity)) return null
+
+  const typeObj = {
+    plain: 40,
+    masala: 60,
+    onion: 50,
+    paper: 90,
+    butter: 70,
+    cheese: 80
+  }
+
+  if (typeObj[type] === undefined) return null;
+  
+  const pricePerDosa = typeObj[type] + (isSpicy ? 10 : 0);
+  const total = pricePerDosa * quantity;
+  return {
+    type, quantity, pricePerDosa, total
+    }
 }
